@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "./reducer";
+import { counterAction } from "./action";
 
 function App() {
+  const dispatch = useDispatch();
+  const counter = useSelector((state: AppState) => state.counter);
+
+  const increase = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    console.log("increase");
+    dispatch(counterAction(counter + 1));
+  };
+
+  const decrease = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    dispatch(counterAction(counter - 1));
+    console.log("decrease");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{counter}</h1>
+      <button type="button" onClick={increase}>
+        +
+      </button>
+      <button type="button" onClick={decrease}>
+        -
+      </button>
     </div>
   );
 }
