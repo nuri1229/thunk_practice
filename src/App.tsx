@@ -4,6 +4,7 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "./reducer";
 import { counterAction } from "./action";
+import { counterThunk } from "./thunk";
 
 function App() {
   const dispatch = useDispatch();
@@ -12,12 +13,12 @@ function App() {
   const increase = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     console.log("increase");
-    dispatch(counterAction(counter + 1));
+    dispatch(counterThunk(counter + 1));
   };
 
   const decrease = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    dispatch(counterAction(counter - 1));
+    dispatch(counterThunk(counter - 1));
     console.log("decrease");
   };
 
